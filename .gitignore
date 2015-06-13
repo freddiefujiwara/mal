@@ -58,3 +58,4 @@ nim/nimcache
 .sbt
 groovy/*.class
 .crystal
+!.gitkeep
