@@ -1,2 +1,0 @@
-defmodule Elixir do
-end
