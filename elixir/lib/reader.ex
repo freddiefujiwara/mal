@@ -1,19 +1,15 @@
 defmodule Reader do
     def peek(obj) do
-        word = Enum.at obj.tokens, obj.position
-        if word == nil do
-            {obj,nil}
-        else
-            {obj,word}
-        end
+        {obj,Enum.at(obj.tokens, obj.position)}
     end
+
     def next(obj) do
-        word = Enum.at obj.tokens, obj.position
-        if word == nil do
-            {obj,nil}
-        else
-            {Dict.put(obj, :position, obj.position + 1),word}
+        {obj,word} = peek obj
+        unless word == nil do
+            {obj,word} = 
+                {Dict.put(obj, :position , obj.position + 1),word}
         end
+        {obj,word}
     end
     def tokenize(obj,str) do
         tokenize_regex = ~r/[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"|;.*|[^\s\[\]{}('"`,;)]*)/
