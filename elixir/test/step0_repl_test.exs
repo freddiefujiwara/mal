@@ -1,4 +1,4 @@
-defmodule ElixirTest do
+defmodule Step0_ReplTest do
   use ExUnit.Case
 
   test "READ" do
