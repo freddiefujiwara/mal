@@ -13,6 +13,15 @@ defmodule ReaderTest do
     reader = Reader.tokenize(reader,"(+ 1 (* 2 3))")
     assert reader.tokens == ["(","+","1","(","*","2","3",")",")"]
   end
+  test "Reader.read_atom" do
+    reader = %{:tokens => [], :position => 0}
+
+    reader = Reader.tokenize(reader,"10")
+    assert Reader.read_atom(reader) == 10
+
+    reader = Reader.tokenize(reader,"-10")
+    assert Reader.read_atom(reader) == -10
+  end
   test "Reader.next and Reader.peek" do
     reader = %{:tokens => [], :position => 0}
 

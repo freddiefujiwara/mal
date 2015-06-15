@@ -1,4 +1,10 @@
 defmodule Reader do
+    def read_atom(obj) do
+        {obj,token} = next obj
+        if Regex.match? ~r/^-?[0-9]+$/, token do
+            String.to_integer token , 10
+        end
+    end
     def peek(obj) do
         {obj,Enum.at(obj.tokens, obj.position)}
     end
