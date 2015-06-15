@@ -16,12 +16,27 @@ defmodule ReaderTest do
   test "Reader.read_atom" do
     reader = %{:tokens => [], :position => 0}
 
+    #integer
     reader = Reader.tokenize(reader,"10")
     assert Reader.read_atom(reader) == 10
 
     reader = Reader.tokenize(reader,"-10")
     assert Reader.read_atom(reader) == -10
+
+    #true/false/nil
+    reader = Reader.tokenize(reader,"true")
+    assert Reader.read_atom(reader) == true
+
+    reader = Reader.tokenize(reader,"false")
+    assert Reader.read_atom(reader) == false
+
+    reader = Reader.tokenize(reader,"nil")
+    assert Reader.read_atom(reader) == nil
+    #atom
+    reader = Reader.tokenize(reader,":ok")
+    assert Reader.read_atom(reader) == :ok
   end
+
   test "Reader.next and Reader.peek" do
     reader = %{:tokens => [], :position => 0}
 

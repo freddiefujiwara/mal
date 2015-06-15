@@ -1,8 +1,17 @@
 defmodule Reader do
     def read_atom(obj) do
         {obj,token} = next obj
-        if Regex.match? ~r/^-?[0-9]+$/, token do
-            String.to_integer token , 10
+        cond do
+            Regex.match? ~r/^-?[0-9]+$/, token ->
+                String.to_integer token , 10
+            token == "true" ->
+                true
+            token == "false" ->
+                false
+            token == "nil" ->
+                nil
+            String.first(token) == ":" ->
+                String.to_atom String.replace(token,~r/^:/,"")
         end
     end
     def peek(obj) do
